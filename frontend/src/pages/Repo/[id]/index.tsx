@@ -16,7 +16,3 @@ function index() {
 
 export default index;
 
-//
-<div className='flex jusstify-center align-center'>
-<embed className="h-[70vh] w-[100vw] bg-red-500"src="https://ipfs.moralis.io:2053/ipfs/Qma5XXMPpLmxcgwM5K34PytrAcG66N73h8XuLBN7nZ9SnW/"></embed>
-</div>

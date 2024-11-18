@@ -4,6 +4,7 @@ import RepoCard from '@/components/RepoCard';
 import connectContract from '@/utils/web3Utils/connectContract';
 
 interface Repository {
+  repoID: number;
   name: string;
   desc: string;
   owners: string[];
@@ -24,6 +25,7 @@ const Page = () => {
       const { contract, accounts } = await connectContract();
       const res: Repository[] = await contract.methods.getRepoByUser().call({ from: accounts[0] });
       console.log(res);
+      console.log(Number(res[0].repoID));
       setRepositories(res);
     }
     func()
@@ -43,10 +45,11 @@ const Page = () => {
         {repositories.length > 0 ? (
           repositories.map((repo) => (
             <RepoCard
+              id={Number(repo.repoID)}
               title={repo.name}
               description={repo.desc}
               creatorAddress={repo.owners[0]}
-              link={`/Repo/${repo.name}`}
+              link={`/Repo/${Number(repo.repoID)}`}
             />
           ))
         ) : (

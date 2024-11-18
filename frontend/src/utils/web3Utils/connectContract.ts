@@ -1,7 +1,7 @@
 import ABI from "../../../../contract/ABI.json";
 import web3Provider from "./web3Provider";
 
-const contractAddress = "0x0fcf4859d699a73c4695895b72b4709e2b1b8e26";
+const contractAddress = "0xFC3DD73C93376D2371571cB3885b604f4Afc1adf";
 
 const connectContract = async() =>{
     const web3 = await web3Provider();

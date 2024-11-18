@@ -1,43 +1,26 @@
-"use client";
+'use client'
+
 import React, { useState, useEffect } from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import axios from "axios";
 import connectContract from "@/utils/web3Utils/connectContract";
+import { create } from 'ipfs-http-client';
+import { getIPFSFolder, getIPFSFolderAlternative } from "./retrieveIPFS";
 
 interface RepositoryType {
-  id:number;
+  id: number;
   name: string;
   description: string;
   owners: string[];
-  cid: string;
+  cids: string;
   dateCreated: bigint;
   lastCommitTime: bigint;
   isEncrypted: boolean;
   commitHistory: string[];
 }
-import { create } from 'ipfs-http-client';
-import { getIPFSFolder, getIPFSFolderAlternative } from "./retrieveIPFS";
-
-
-const arrayBufferToString = (buffer:ArrayBuffer) => {
-  const decoder = new TextDecoder('utf-8');
-  return decoder.decode(buffer);
-};
-
 
 const RepoDashboard: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -50,47 +33,60 @@ const RepoDashboard: React.FC = () => {
   const [isEncrypted, setIsEncrypted] = useState<boolean>(false);
   const [lastCommitTime, setLastCommitTime] = useState<number>(0);
   const [files, setFiles] = useState<{ name: string; url: string }[]>([]); // Store files with name and URL
+  const [repoId, setRepoId] = useState(0);
+  const [mounted, setMounted] = useState(false); // To track client-side rendering
+
+  useEffect(() => {
+    // Ensure this runs only on the client side
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      const segments = window.location.pathname.split('/');
+      console.log(segments)
+      setRepoId(Number(segments[2]));
+      console.log(repoId); // This should now be safe to run on the client side
+    }
+  }, [mounted]); // Run only after the component has mounted
 
   const fetchRepoData = async () => {
     try {
       const { contract, accounts } = await connectContract();
-      const response: RepositoryType = await contract.methods
-        .getRepoByID(1)
-        .call({ from: accounts[0] });
 
+      if (!repoId) return;
+
+      const response: RepositoryType = await contract.methods
+        .getRepoByID(repoId)
+        .call({ from: accounts[0] });
       setName(response.name);
       setDesc(response.description);
       setOwners(response.owners);
       setCommitHistory(response.commitHistory);
-      setCid(response.cid);
+      setCid(response.cids);
       setDateCreated(Number(response.dateCreated)); // Convert BigInt to number
       setLastCommitTime(Number(response.lastCommitTime)); // Convert BigInt to number
       setIsEncrypted(response.isEncrypted);
       console.log(response);
+      console.log(cid, " is cid")
     } catch (error) {
       console.error("Error fetching repository data:", error);
     }
   };
 
-      // const response = await axios.get(`https://gateway.pinata.cloud/ipfs/${cid}/`, { responseType: 'arraybuffer',  });
-
-
-      const fetchDirectory = async () => {
-        const text = getIPFSFolderAlternative();
-        console.log(text);
-      };
-
+  // const fetchDirectory = async () => {
+  //   const text = getIPFSFolderAlternative();
+  //   console.log(text);
+  // };
 
   useEffect(() => {
     fetchRepoData();
-  }, [name]);
+  }, [repoId]); // Fetch repo data whenever repoId changes
+
 
   useEffect(() => {
-    if (cid) {
-      fetchDirectory(); // Fetch files when the CID is available
-    }
+    console.log("CID updated:", cid); // Check if the CID is updated correctly
   }, [cid]);
-
   return (
     <div style={{ display: "flex", flexDirection: "column", padding: "30px 10%" }}>
       {!name ? (
@@ -122,14 +118,14 @@ const RepoDashboard: React.FC = () => {
                 </div>
               </div>
               <div className="relative pb-[30%] h-0 overflow-hidden bg-red-500 ">
-  {cid ? (
-    <embed
-      type="text/html"
-      src={`https://ipfs.moralis.io:2053/ipfs/${cid}/`}
-      className="absolute top-0 left-0 w-full h-[450px]"
-    ></embed>
-  ) : null}
-</div>
+                {(
+                  <embed
+                    type="text/html"
+                    src={`https://ipfs.io/ipfs/${cid}/`}
+                    className="absolute top-0 left-0 w-full h-[450px]"
+                  ></embed>
+                )}
+              </div>
             </div>
           </div>
           <div style={{ display: "flex", flexDirection: "column", marginTop: "50px" }}>
@@ -143,28 +139,3 @@ const RepoDashboard: React.FC = () => {
 };
 
 export default RepoDashboard;
-
-
-/*
-<Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="w-[100px]">File Name</TableHead>
-                      <TableHead className="text-center">Download</TableHead>
-                      <TableHead className="text-right">Time-Stamp</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {files.map((file, index) => (
-                      <TableRow key={index}>
-                        <TableCell className="font-medium">{file.name}</TableCell>
-                        <TableCell className='text-center'>
-                          <a href={file.url}>
-                            <Button variant="link">Download</Button>
-                          </a>
-                        </TableCell>
-                        <TableCell className="text-right">{new Date(lastCommitTime).toLocaleString()}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>*/

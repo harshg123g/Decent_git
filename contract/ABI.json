@@ -85,7 +85,7 @@
 			},
 			{
 				"internalType": "string",
-				"name": "_cid",
+				"name": "_cids",
 				"type": "string"
 			},
 			{
@@ -109,7 +109,7 @@
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "_cid",
+				"name": "_cids",
 				"type": "string"
 			},
 			{
@@ -135,6 +135,66 @@
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "getAllRepo",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "repoID",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "address[]",
+						"name": "owners",
+						"type": "address[]"
+					},
+					{
+						"internalType": "string",
+						"name": "cids",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "dateCreated",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastCommitTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isEncrypted",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "commitHistory",
+						"type": "uint256[]"
+					}
+				],
+				"internalType": "struct DGIT.Repository[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -146,6 +206,16 @@
 		"outputs": [
 			{
 				"components": [
+					{
+						"internalType": "uint256",
+						"name": "pullID",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
 					{
 						"internalType": "enum DGIT.Status",
 						"name": "status",
@@ -160,6 +230,11 @@
 						"internalType": "string",
 						"name": "streamID",
 						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "time",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct DGIT.Pull",
@@ -183,6 +258,16 @@
 			{
 				"components": [
 					{
+						"internalType": "uint256",
+						"name": "pullID",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
 						"internalType": "enum DGIT.Status",
 						"name": "status",
 						"type": "uint8"
@@ -196,6 +281,11 @@
 						"internalType": "string",
 						"name": "streamID",
 						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "time",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct DGIT.Pull[]",
@@ -213,6 +303,16 @@
 			{
 				"components": [
 					{
+						"internalType": "uint256",
+						"name": "pullID",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
 						"internalType": "enum DGIT.Status",
 						"name": "status",
 						"type": "uint8"
@@ -226,6 +326,11 @@
 						"internalType": "string",
 						"name": "streamID",
 						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "time",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct DGIT.Pull[]",
@@ -249,14 +354,14 @@
 			{
 				"components": [
 					{
-						"internalType": "uint256",
-						"name": "repoID",
-						"type": "uint256"
-					},
-					{
 						"internalType": "string",
 						"name": "name",
 						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "repoID",
+						"type": "uint256"
 					},
 					{
 						"internalType": "string",
@@ -270,7 +375,7 @@
 					},
 					{
 						"internalType": "string",
-						"name": "cid",
+						"name": "cids",
 						"type": "string"
 					},
 					{
@@ -309,14 +414,14 @@
 			{
 				"components": [
 					{
-						"internalType": "uint256",
-						"name": "repoID",
-						"type": "uint256"
-					},
-					{
 						"internalType": "string",
 						"name": "name",
 						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "repoID",
+						"type": "uint256"
 					},
 					{
 						"internalType": "string",
@@ -330,7 +435,7 @@
 					},
 					{
 						"internalType": "string",
-						"name": "cid",
+						"name": "cids",
 						"type": "string"
 					},
 					{
@@ -416,6 +521,16 @@
 		"name": "pullsByID",
 		"outputs": [
 			{
+				"internalType": "uint256",
+				"name": "pullID",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
 				"internalType": "enum DGIT.Status",
 				"name": "status",
 				"type": "uint8"
@@ -429,6 +544,11 @@
 				"internalType": "string",
 				"name": "streamID",
 				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "time",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -450,6 +570,16 @@
 		"name": "pullsByRepo",
 		"outputs": [
 			{
+				"internalType": "uint256",
+				"name": "pullID",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
 				"internalType": "enum DGIT.Status",
 				"name": "status",
 				"type": "uint8"
@@ -463,6 +593,11 @@
 				"internalType": "string",
 				"name": "streamID",
 				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "time",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -484,6 +619,16 @@
 		"name": "pullsByUser",
 		"outputs": [
 			{
+				"internalType": "uint256",
+				"name": "pullID",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
 				"internalType": "enum DGIT.Status",
 				"name": "status",
 				"type": "uint8"
@@ -497,6 +642,11 @@
 				"internalType": "string",
 				"name": "streamID",
 				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "time",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",

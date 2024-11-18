@@ -13,6 +13,7 @@ import { Button } from './ui/button';
 
 // Define props interface
 interface RepoCardProps {
+    id:number,
     title: any;
     description: any;
     creatorAddress: any;
@@ -20,13 +21,13 @@ interface RepoCardProps {
 }
 
 // Use props in the component
-const RepoCard: React.FC<RepoCardProps> = ({ title, description, creatorAddress, link }) => {
+const RepoCard: React.FC<RepoCardProps> = ({ id,title, description, creatorAddress, link }) => {
     return (
         <div>
             <Card>
                 <CardHeader>
                     <CardTitle>{title}</CardTitle>
-                    <CardDescription>{description}</CardDescription>
+                    <CardDescription>{description}{id}</CardDescription>
                 </CardHeader>
                 <CardContent>
                     <p>{creatorAddress}</p>
