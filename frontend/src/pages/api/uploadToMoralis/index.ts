@@ -1,5 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import Moralis from 'moralis';
+import { createThirdwebClient } from "thirdweb";
+import { upload } from "thirdweb/storage";
+
 
 
 type ResponseData = {
@@ -16,17 +19,43 @@ export default async function Phandler(
     }
     try {
         const { abi } = req.body;
-        if (!process.env.MORALIS_API_KEY) {
+        // if (!process.env.MORALIS_API_KEY) {
+        //     throw new Error('MORALIS_API_KEY is not defined');
+        // }
+
+        if (!process.env.THIRDWEB_SECRET_KEY) {
             throw new Error('MORALIS_API_KEY is not defined');
         }
 
-        await Moralis.start({
-            apiKey: process.env.MORALIS_API_KEY,
-        });
+        const client = createThirdwebClient({
+            // use `secretKey` for server side or script usage
+            secretKey: process.env.THIRDWEB_SECRET_KEY,
+          });
 
-        const response = await Moralis.EvmApi.ipfs.uploadFolder({ abi });
 
-        res.status(200).json({ message: response.toJSON() });
+          const response = await upload({
+            client,
+            files: abi,
+          });
+
+
+        // await Moralis.start({
+        //     apiKey: process.env.MORALIS_API_KEY,
+        // });
+
+        // const response = await Moralis.EvmApi.ipfs.uploadFolder({ abi });
+
+        // res.status(200).json({ message: response.toJSON() });
+          if(!response) throw "No response";
+          if(response.length <= 0) throw "Response length less than 0";
+          const firstUrl = response[0];
+
+        console.log(response);
+        const message = [{ path: firstUrl }];
+
+        res.status(200).json({
+            message: message, // Directly use the response here
+          });    
 
     } catch (error) {
         console.error('Error uploading to Moralis:', error);

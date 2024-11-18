@@ -13,10 +13,10 @@ import { Button } from './ui/button';
 
 // Define props interface
 interface RepoCardProps {
-    title: string;
-    description: string;
-    creatorAddress: string;
-    link: string;
+    title: any;
+    description: any;
+    creatorAddress: any;
+    link: any;
 }
 
 // Use props in the component

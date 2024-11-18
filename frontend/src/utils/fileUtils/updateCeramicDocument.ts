@@ -1,4 +1,4 @@
-import Ceramic from "../ceramicUtils/connectCeramic";
+import Ceramic from "../../components/connectCeramic";
 import { TileDocument } from '@ceramicnetwork/stream-tile'; // Import TileDocument
 
 

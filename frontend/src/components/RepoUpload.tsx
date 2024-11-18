@@ -9,10 +9,10 @@ const RepoUpload = () => {
     const files = event.target.files;
     try{
       const response = await uploadToMoralis(files);
-      const cid = splitCID(response,0);
+      const cid = splitCID(response);
       console.log(cid)
       const { contract, accounts } = await connectContract();
-      const res = await contract.methods.createRepo("Repo1", "Repo1_desc",cid,false).send({ from: accounts[0] });
+      const res = await contract.methods.createRepo("Repo2", "Repo2_desc",cid,false).send({ from: accounts[0] });
       console.log(res);
     }catch(e)
     {

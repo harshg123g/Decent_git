@@ -1,0 +1,505 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_repoID",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_addr",
+				"type": "address"
+			}
+		],
+		"name": "addOwner",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_pullID",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_repoID",
+				"type": "uint256"
+			}
+		],
+		"name": "closePR",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_streamID",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_repoID",
+				"type": "uint256"
+			}
+		],
+		"name": "createPull",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_desc",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_cid",
+				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "_isEncrypted",
+				"type": "bool"
+			}
+		],
+		"name": "createRepo",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_cid",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_pullID",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_repoID",
+				"type": "uint256"
+			}
+		],
+		"name": "mergePull",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getPullByID",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "enum DGIT.Status",
+						"name": "status",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "repoId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "streamID",
+						"type": "string"
+					}
+				],
+				"internalType": "struct DGIT.Pull",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getPullByRepo",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "enum DGIT.Status",
+						"name": "status",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "repoId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "streamID",
+						"type": "string"
+					}
+				],
+				"internalType": "struct DGIT.Pull[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getPullByUser",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "enum DGIT.Status",
+						"name": "status",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "repoId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "streamID",
+						"type": "string"
+					}
+				],
+				"internalType": "struct DGIT.Pull[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getRepoByID",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "repoID",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "address[]",
+						"name": "owners",
+						"type": "address[]"
+					},
+					{
+						"internalType": "string",
+						"name": "cid",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "dateCreated",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastCommitTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isEncrypted",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "commitHistory",
+						"type": "uint256[]"
+					}
+				],
+				"internalType": "struct DGIT.Repository",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getRepoByUser",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "repoID",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "address[]",
+						"name": "owners",
+						"type": "address[]"
+					},
+					{
+						"internalType": "string",
+						"name": "cid",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "dateCreated",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastCommitTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isEncrypted",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "commitHistory",
+						"type": "uint256[]"
+					}
+				],
+				"internalType": "struct DGIT.Repository[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_repoID",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_PRID",
+				"type": "uint256"
+			}
+		],
+		"name": "isInRepo",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_repoID",
+				"type": "uint256"
+			}
+		],
+		"name": "isOwner",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "pullsByID",
+		"outputs": [
+			{
+				"internalType": "enum DGIT.Status",
+				"name": "status",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint256",
+				"name": "repoId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "streamID",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "pullsByRepo",
+		"outputs": [
+			{
+				"internalType": "enum DGIT.Status",
+				"name": "status",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint256",
+				"name": "repoId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "streamID",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "pullsByUser",
+		"outputs": [
+			{
+				"internalType": "enum DGIT.Status",
+				"name": "status",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint256",
+				"name": "repoId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "streamID",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
