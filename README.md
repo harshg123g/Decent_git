@@ -11,6 +11,7 @@ Features:
 5.)User-friendly Interface: Simplified UI for uploading files, managing repositories, and collaborating.
 
 Installation:
+
 git clone https://github.com/your-username/decent-git.git
 
 cd decent-git
