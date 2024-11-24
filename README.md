@@ -12,8 +12,11 @@ Features:
 
 Installation:
 git clone https://github.com/your-username/decent-git.git
+
 cd decent-git
+
 npm install
+
 npm run dev
 
 Technologies Used:
